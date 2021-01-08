@@ -1,14 +1,12 @@
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:default
-    username: alexis
-    password: 1234
+    url: jdbc:mysql://localhost:3306/demospring
+    username: root
+    password: Alexis241096
   jpa:
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.H2Dialect
 
-  h2:
-    console:
-      enabled: true
+    properties:
+      hibernate:
+        dialect : org.hibernate.dialect.MySQL5Dialect

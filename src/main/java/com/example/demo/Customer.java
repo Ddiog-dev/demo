@@ -9,12 +9,18 @@ import javax.persistence.Id;
 public class Customer {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-
     private Integer id;
 
     private String name;
 
     private String email;
+
+    public Customer(){}
+
+    public Customer(String name, String email){
+        this.name =name;
+        this.email = email;
+    }
 
     public Integer getId() {
         return id;
