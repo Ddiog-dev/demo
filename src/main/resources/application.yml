@@ -1,8 +1,4 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/demospring
-    username: root
-    password: Alexis241096
   jpa:
     hibernate:
       ddl-auto: update
@@ -10,3 +6,5 @@ spring:
     properties:
       hibernate:
         dialect : org.hibernate.dialect.MySQL5Dialect
+  liquibase:
+    enabled: true
