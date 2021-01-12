@@ -6,18 +6,15 @@ services:
       dockerfile: Dockerfile
     container_name: spring-app
     ports:
-      - "80:80"
       - "3000:8080"
-
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/test
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/sys
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
 
   database:
     image: mysql
     container_name: db-app
-    restart: always
     ports:
     - "4000:3306"
     environment:
