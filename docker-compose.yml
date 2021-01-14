@@ -1,22 +1,23 @@
 version: "3"
 services:
+
+  database:
+    image: mysql
+    container_name: db-app
+    ports:
+      - "4000:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+
   core:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: spring-app
+    restart: always
     ports:
       - "3000:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/sys
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
-
-  database:
-    image: mysql
-    container_name: db-app
-    ports:
-    - "4000:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=1234
-
