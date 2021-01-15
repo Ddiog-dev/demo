@@ -36,6 +36,12 @@ public class MainController {
         return customerService.findByName(name);
     }
 
+    @GetMapping(path="/deleteByName") // Map ONLY POST Requests
+    public String  deleteByName (@RequestParam(value = "name") String name) {
+         customerService.deleteByName(name);
+         return "Ok";
+    }
+
     @GetMapping(path="/all")
     public List<CustomerDTO>  getAllUsers() {
         return customerService.findAll();

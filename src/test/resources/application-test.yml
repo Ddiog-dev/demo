@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:default
+    url: jdbc:h2:mem:default:public
     username: root
     password: 1234
+    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: update

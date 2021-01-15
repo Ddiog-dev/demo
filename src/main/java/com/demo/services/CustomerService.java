@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,12 +30,18 @@ public class CustomerService {
     }
 
     public CustomerDTO findByName(String name) {
-        List<CustomerDTO> customerDTOS = customerRepository.findByName(name)
+        Optional<List<Customer>> customers = customerRepository.findByName(name);
+
+        return customers.isPresent()? customers.get()
                 .stream()
                 .map(user -> modelMapper.map(user, CustomerDTO.class))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+                .get(0)  // If we have a result
+                : new CustomerDTO("","") ; // return an empty CustomerDTO
+    }
 
-        return customerDTOS.get(0);
+    public void deleteByName(String name){
+        customerRepository.deleteByName(name);
     }
 
     public Customer save(CustomerDTO customerDTO) {
