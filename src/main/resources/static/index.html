@@ -1,15 +1,16 @@
-<!DOCTYPE HTML>
 <html>
 <head>
-    <title>Demo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Spring Boot - Angularjs Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/js/controller.js"></script>
+
 </head>
-
 <body>
-<p>add user <a href="/demo/add">here</a></p>
-</body>
-
-<body>
-<p>view users <a href="/demo/all">here</a></p>
+<div ng-app="app" ng-controller="controller">
+    <button id="btn-id" ng-click="clickfunction()">Press for Time</button>
+    <p ng-bind="welcome"></p>
+</div>
 </body>
 </html>

@@ -44,7 +44,8 @@ public class CustomerService {
         customerRepository.deleteByName(name);
     }
 
-    public Customer save(CustomerDTO customerDTO) {
-        return customerRepository.save(modelMapper.map(customerDTO,Customer.class));
+    public CustomerDTO save(CustomerDTO customerDTO) {
+        customerRepository.save(modelMapper.map(customerDTO,Customer.class));
+        return customerDTO;
     }
 }

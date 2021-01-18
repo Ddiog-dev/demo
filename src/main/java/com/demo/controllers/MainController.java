@@ -17,17 +17,11 @@ public class MainController {
     @Autowired
     private CustomerService customerService;
 
-    private final AtomicLong counter = new AtomicLong();
-
 
     @GetMapping(path="/add") // Map ONLY POST Requests
     public CustomerDTO  addNewUser (@RequestParam(value = "name", defaultValue = "Hello") String name,
                                     @RequestParam(value = "name", defaultValue = "World") String email) {
-
-        CustomerDTO customerDTO = new CustomerDTO(name, email);
-        // If we have to check the return value, we can use the returnCustomer var
-        Customer returnCustomer = customerService.save(customerDTO);
-        return customerDTO;
+        return customerService.save(new CustomerDTO(name, email));
 
     }
 
