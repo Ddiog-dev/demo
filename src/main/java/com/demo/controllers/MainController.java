@@ -22,7 +22,7 @@ public class MainController {
 
     @GetMapping(path="/add") // Map ONLY POST Requests
     public CustomerDTO  addNewUser (@RequestParam(value = "name", defaultValue = "Hello") String name,
-                                    @RequestParam(value = "name", defaultValue = "World") String email) {
+                                    @RequestParam(value = "email", defaultValue = "World") String email) {
         return customerService.save(new CustomerDTO(name, email));
 
     }
