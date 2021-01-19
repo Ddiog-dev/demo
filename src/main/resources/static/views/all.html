@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<div>
+    <h2> All Student </h2>
+    {{message}}
+
+    <table border = "0">
+        <tr>
+            <td>Enter name:</td>
+            <td><input type = "text" ng-model = "customer.name"></td>
+        </tr>
+        <tr>
+            <td>Enter email: </td>
+            <td><input type = "text" ng-model = "customer.email"></td>
+        </tr>
+        <tr>
+            <td>Name: </td>
+            <td>{{customer.name()}}</td>
+        </tr>
+        <tr>
+            <td>Subject:</td>
+
+            <td>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Marks</th>
+                    </tr>
+                    <tr ng-repeat = "customer in customers">
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.email }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</html>
