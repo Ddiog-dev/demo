@@ -1,15 +1,14 @@
-var app = angular.module('app', ['ngRoute','ngResource']);
-app.config(function($routeProvider){
+var mainApp = angular.module("mainApp", ['ngRoute']);
+mainApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-        .when('/name',{
-            templateUrl: 'src/main/resources/static/views/name.html',
-            controller: 'namesController'
+        .when('/all', {
+            templateUrl: 'all.htm', controller: '/js/customerController'
         })
-        .when('/email',{
-            templateUrl: 'ssrc/main/resources/static/views/email.html',
-            controller: 'emailsController'
+        .when('/add', {
+            templateUrl: 'add.htm', controller: '/js/studentController'
         })
-        .otherwise(
-            { redirectTo: '/'}
-        );
-});
+        .otherwise ({
+            redirectTo: '/add'
+        });
+
+}]);
