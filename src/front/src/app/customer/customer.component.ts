@@ -16,6 +16,10 @@ export class CustomerComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
+    this.getAllCustomer()
+  }
+
+  getAllCustomer(): void{
     this.http.get<any>('http://localhost:8080/server/all').subscribe(data => {
       this.customers = data;
     })
@@ -32,8 +36,11 @@ export class CustomerComponent implements OnInit {
 
     this.http.get<any>(url).subscribe(data => {
       console.log("Added :")
-     console.log(data)
+      console.log(data)
+      this.newCustomer = {name : "", email : ""};
+      this.getAllCustomer()
     })
+
   }
 
 

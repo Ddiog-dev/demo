@@ -4,15 +4,21 @@
   <table border = "0">
 
     <!-- Customer creation form  -->
-    <form>
-        <tr>Name</tr>
+    <tr> Create new customer  </tr>
+    <tr>
+        <td>Name</td>
         <input type="text" [(ngModel)]="newCustomer.name" [ngModelOptions]="{standalone: true}">
-
-        <tr>Email</tr>
+    </tr>
+    <tr>
+        <td>Email</td>
         <input type="text" [(ngModel)]="newCustomer.email" [ngModelOptions]="{standalone: true}">
-    </form>
+    </tr>
 
+    <tr>
+      <td><button id="btn-createCustomer" (click)="addCustomer(newCustomer)">Add new customer in database</button> <td>
+    </tr>
 
+    <tr> Find customer  </tr>
     <!-- Customer finding form  -->
     <tr>
       <td>Enter name:</td>
