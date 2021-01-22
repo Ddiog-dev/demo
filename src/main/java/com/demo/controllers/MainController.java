@@ -4,15 +4,13 @@ import com.demo.DTO.CustomerDTO;
 import com.demo.entities.Customer;
 import com.demo.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController // This means that this class is a Controller
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/server")
 public class MainController {
 

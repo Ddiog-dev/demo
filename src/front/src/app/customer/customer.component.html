@@ -1,0 +1,48 @@
+<div>
+  <h2> All Customers </h2>
+
+  <table border = "0">
+
+    <!-- Customer creation form  -->
+    <form>
+        <tr>Name</tr>
+        <input type="text" [(ngModel)]="newCustomer.name" [ngModelOptions]="{standalone: true}">
+
+        <tr>Email</tr>
+        <input type="text" [(ngModel)]="newCustomer.email" [ngModelOptions]="{standalone: true}">
+    </form>
+
+
+    <!-- Customer finding form  -->
+    <tr>
+      <td>Enter name:</td>
+      <input type="text" [(ngModel)]="searchName" [ngModelOptions]="{standalone: true}">
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>{{ searchCustomerResult.name }}</td>
+      <td>{{ searchCustomerResult.email }}</td>
+    </tr>
+    <tr>
+      <td><button id="btn-findByName" (click)="findCustomerByName(searchName)">Find customer in database</button> <td>
+    </tr>
+
+    <!-- Customer display table  -->
+    <tr>
+      <td>Subject:</td>
+
+      <td>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Marks</th>
+          </tr>
+          <tr *ngFor='let customer of customers'>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
