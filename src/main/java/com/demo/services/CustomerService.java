@@ -2,6 +2,7 @@ package com.demo.services;
 
 import com.demo.DTO.CustomerDTO;
 import com.demo.entities.Customer;
+import com.demo.regex.CustomerRegex;
 import com.demo.repositories.CustomerRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,14 +33,20 @@ public class CustomerService {
     }
 
     public CustomerDTO findByName(String name) {
-        Optional<List<Customer>> customers = customerRepository.findByName(name);
+        Pattern pattern = Pattern.compile(CustomerRegex.NAME(), Pattern.CASE_INSENSITIVE);
+        Matcher findName = pattern.matcher(name);
+        Optional<List<Customer>> customers;
 
-        return customers.isPresent()? customers.get()
+        //value depends if the argument name has a valid format
+        customers = findName.matches()? customerRepository.findByName(name): Optional.empty();
+
+        return customers.isPresent() ? customers.get()
                 .stream()
                 .map(user -> modelMapper.map(user, CustomerDTO.class))
                 .collect(Collectors.toList())
                 .get(0)  // If we have a result
-                : new CustomerDTO("","") ; // return an empty CustomerDTO
+                : new CustomerDTO("", ""); // return an empty CustomerDTO
+
     }
 
     public void deleteByName(String name){
@@ -45,7 +54,25 @@ public class CustomerService {
     }
 
     public CustomerDTO save(CustomerDTO customerDTO) {
-        customerRepository.save(modelMapper.map(customerDTO,Customer.class));
-        return customerDTO;
+        if(isCustomerValid(customerDTO)){
+            customerRepository.save(modelMapper.map(customerDTO,Customer.class));
+            return customerDTO;
+        }
+        else {
+            System.console().printf("Invalid customer");
+            return new CustomerDTO("","");
+        }
     }
+
+    private boolean isCustomerValid(CustomerDTO customerDTO){
+
+        Pattern pattern = Pattern.compile(CustomerRegex.NAME(), Pattern.CASE_INSENSITIVE);
+        Matcher name = pattern.matcher(customerDTO.getName());
+        Matcher email = pattern.matcher(customerDTO.getEmail());
+
+        return name.matches() && email.matches();
+    }
+
+
 }
+
