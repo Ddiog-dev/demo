@@ -3,7 +3,7 @@ services:
 
   database:
     image: mysql
-    container_name: db-app
+    container_name: database
     ports:
       - "4000:3306"
     environment:
@@ -12,8 +12,8 @@ services:
   core:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: spring-app
+      dockerfile: core.Dockerfile
+    container_name: core
     restart: always
     ports:
       - "3000:8080"
@@ -21,3 +21,12 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/sys
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=1234
+
+  front:
+    build:
+      context: ./src/front
+      dockerfile: front.Dockerfile
+    container_name: front
+    ports:
+    - '4200:4200'
+    command: bash -c "npm install && ng serve --host 0.0.0.0 --port 4200 --prod "

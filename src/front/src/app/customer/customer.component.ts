@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ICustomer} from "./customer";
 import { HttpClient } from '@angular/common/http';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-customer-component',
@@ -12,29 +13,32 @@ export class CustomerComponent implements OnInit {
   customers: ICustomer[]; // customers in database
   searchCustomerResult: ICustomer = {name : "", email : ""}; // Customer for findByName
   searchName: string = "" ;
+  url: string = environment.backendUrl
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+  }
 
   ngOnInit(): void {
     this.getAllCustomer()
   }
 
   getAllCustomer(): void{
-    this.http.get<any>('http://localhost:8080/server/all').subscribe(data => {
+    this.http.get<any>(this.url+'server/all').subscribe(data => {
       this.customers = data;
     })
   }
 
   findCustomerByName(name: string): void {
-    this.http.get<any>("http://localhost:8080/server/findByName?name="+name).subscribe(data => {
+    this.http.get<any>(this.url+"server/findByName?name="+name).subscribe(data => {
       this.searchCustomerResult = data;
     })
   }
 
   addCustomer(customer: ICustomer){
-    let url = "http://localhost:8080/server/add?name="+customer.name+"&email="+customer.email;
+    let addUrl = this.url+"server/add?name="+customer.name+"&email="+customer.email;
 
-    this.http.get<any>(url).subscribe(data => {
+    this.http.get<any>(addUrl).subscribe(data => {
       console.log("Added :")
       console.log(data)
       this.newCustomer = {name : "", email : ""};
